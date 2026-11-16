@@ -1,0 +1,12 @@
+target/
+node_modules/
+dist/
+.idea/
+*.iml
+.vscode/
+.DS_Store
+.env
+# impeccable runtime folders (decision mocks, review captures)
+web/.impeccable/mocks/
+web/.impeccable/review/
+web/.impeccable/questions/

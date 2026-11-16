@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: registrar
+  mongodb:
+    # A replica set (transactions). Locally: compose's MongoDB, reached through its published port.
+    uri: ${MONGODB_URI:mongodb://localhost:27018/registrar?directConnection=true}
+  data:
+    mongodb:
+      # Indexes are Flamingock migrations, not annotations.
+      auto-index-creation: false
+
+flamingock:
+  # Migrate before the web server opens its port.
+  management-mode: INITIALIZING_BEAN
+
+server:
+  # Not 8081: that's the kitchensink port.
+  port: ${PORT:8082}
+  shutdown: graceful
+
+management:
+  # Internal port, never exposed by a gateway. Only the probes are also on the public port.
+  server:
+    port: ${MANAGEMENT_PORT:9092}
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+        # /livez and /readyz on the public port.
+        add-additional-paths: true
+      group:
+        # MongoDB counts for readiness only: restarting the app wouldn't fix the database.
+        readiness:
+          include: readinessState, mongo

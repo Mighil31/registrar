@@ -1,0 +1,55 @@
+# Local stack: MongoDB (single-node replica set, with auth) + the backend.
+#   cp .env.example .env   # then set real passwords
+#   docker compose up --build
+# Backend: http://localhost:8082   Probes: /livez, /readyz
+# MongoDB from the host: mongodb://<user>:<pass>@localhost:27018/registrar?authSource=registrar&directConnection=true
+services:
+  mongo:
+    image: mongo:8.0
+    # A replica set, because transactions need one. With auth on, its members need a shared key file;
+    # one member, so a fresh random key at each start is fine.
+    entrypoint:
+      - bash
+      - -c
+      - |
+        head -c 756 /dev/urandom | base64 > /data/keyfile
+        chmod 400 /data/keyfile && chown 999:999 /data/keyfile
+        exec docker-entrypoint.sh mongod --replSet rs0 --keyFile /data/keyfile --bind_ip_all
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:?set in .env}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:?set in .env}
+      MONGO_APP_DB: registrar
+      MONGO_APP_USER: ${MONGO_APP_USER:?set in .env}
+      MONGO_APP_PASSWORD: ${MONGO_APP_PASSWORD:?set in .env}
+    volumes:
+      - mongo-data:/data/db
+      - ./docker/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    ports:
+      # Not 27017: that's the kitchensink port's MongoDB.
+      - "127.0.0.1:27018:27017"
+    # Also initiates the replica set on first start; healthy once this member is primary.
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          mongosh --quiet -u "$$MONGO_INITDB_ROOT_USERNAME" -p "$$MONGO_INITDB_ROOT_PASSWORD"
+          --authenticationDatabase admin --eval
+          "try { rs.status() } catch (e) { rs.initiate({_id: 'rs0', members: [{_id: 0, host: 'mongo:27017'}]}) }
+          db.hello().isWritablePrimary ? 1 : 0" | grep -qx 1
+      interval: 5s
+      timeout: 10s
+      retries: 30
+
+  backend:
+    build: ./backend
+    environment:
+      MONGODB_URI: mongodb://${MONGO_APP_USER}:${MONGO_APP_PASSWORD}@mongo:27017/registrar?authSource=registrar&replicaSet=rs0
+    ports:
+      - "127.0.0.1:8082:8082"
+      - "127.0.0.1:9092:9092"
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+volumes:
+  mongo-data:
