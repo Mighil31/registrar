@@ -18,6 +18,18 @@ server:
   port: ${PORT:8082}
   shutdown: graceful
 
+registrar:
+  jwt:
+    # PEM keys; unset in dev, where a key pair is generated at startup.
+    private-key: ${REGISTRAR_JWT_PRIVATE_KEY:}
+    public-key: ${REGISTRAR_JWT_PUBLIC_KEY:}
+  admin:
+    # The first admin, created only while no admin exists.
+    email: ${REGISTRAR_ADMIN_EMAIL:}
+    password: ${REGISTRAR_ADMIN_PASSWORD:}
+    name: ${REGISTRAR_ADMIN_NAME:}
+    phone-number: ${REGISTRAR_ADMIN_PHONE:}
+
 management:
   # Internal port, never exposed by a gateway. Only the probes are also on the public port.
   server:

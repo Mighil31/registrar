@@ -44,6 +44,11 @@ services:
     build: ./backend
     environment:
       MONGODB_URI: mongodb://${MONGO_APP_USER}:${MONGO_APP_PASSWORD}@mongo:27017/registrar?authSource=registrar&replicaSet=rs0
+      # The first admin, created only while no admin exists.
+      REGISTRAR_ADMIN_EMAIL: ${ADMIN_EMAIL:?set in .env}
+      REGISTRAR_ADMIN_PASSWORD: ${ADMIN_PASSWORD:?set in .env}
+      REGISTRAR_ADMIN_NAME: ${ADMIN_NAME:-Admin}
+      # No JWT keys: a key pair is generated per run (dev). Set REGISTRAR_JWT_PRIVATE_KEY/PUBLIC_KEY otherwise.
     ports:
       - "127.0.0.1:8082:8082"
       - "127.0.0.1:9092:9092"
