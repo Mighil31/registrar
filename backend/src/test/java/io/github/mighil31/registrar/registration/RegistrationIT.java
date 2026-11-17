@@ -33,6 +33,21 @@ class RegistrationIT extends ApiIT {
     }
 
     @Test
+    void browseMarksTheEventsImRegisteredFor() {
+        String going = id(event(Map.of("title", "Going " + java.util.UUID.randomUUID())));
+        register(going, member());
+        Account member = member();
+        register(going, member);
+
+        Map page = api.get("/api/v1/events?q=" + getEvent(going, admin).get("title"), member.auth())
+                .getBody();
+
+        assertThat((List<Map>) page.get("items"))
+                .singleElement()
+                .satisfies(e -> assertThat(e).containsEntry("registered", true).containsEntry("registeredCount", 2));
+    }
+
+    @Test
     void aFullEventRefusesMembers() {
         String id = id(event(Map.of("capacity", 1)));
         register(id, member());

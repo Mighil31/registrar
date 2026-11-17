@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.annotations.servers.Server;
+import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.media.Content;
 import io.swagger.v3.oas.models.media.IntegerSchema;
 import io.swagger.v3.oas.models.media.MapSchema;
@@ -13,6 +15,9 @@ import io.swagger.v3.oas.models.media.ObjectSchema;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.responses.ApiResponse;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +30,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration(proxyBeanMethods = false)
 @OpenAPIDefinition(
         info = @Info(title = "Registrar API", version = "v1"),
+        servers = @Server(url = "/"),
         security = @SecurityRequirement(name = OpenApiConfig.BEARER))
 @SecurityScheme(name = OpenApiConfig.BEARER, type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")
 class OpenApiConfig {
@@ -46,11 +52,49 @@ class OpenApiConfig {
                             .addMediaType(
                                     org.springframework.http.MediaType.APPLICATION_PROBLEM_JSON_VALUE,
                                     new MediaType().schema(new Schema<>().$ref(PROBLEM))));
+            Set<String> requestBodies = requestBodySchemas(openApi);
+            openApi.getComponents().getSchemas().forEach((name, schema) -> {
+                if (!requestBodies.contains(name) && !PROBLEM.equals(name)) {
+                    requireAllFields(schema);
+                }
+            });
             openApi.getPaths()
                     .values()
                     .forEach(path -> path.readOperations()
                             .forEach(operation -> operation.getResponses().addApiResponse("default", problem)));
         };
+    }
+
+    /**
+     * Response records always send every field (null included), so each is required; the nullable
+     * ones say so ({@code @Schema(nullable = true)}). Without this every response field would be
+     * optional in the generated client. Request bodies keep the {@code required} their validation
+     * annotations give them.
+     */
+    private static void requireAllFields(Schema<?> schema) {
+        if (schema.getProperties() != null) {
+            schema.setRequired(List.copyOf(schema.getProperties().keySet()));
+        }
+    }
+
+    private static Set<String> requestBodySchemas(OpenAPI openApi) {
+        Set<String> names = new HashSet<>();
+        openApi.getPaths()
+                .values()
+                .forEach(path -> path.readOperations().forEach(operation -> {
+                    if (operation.getRequestBody() != null
+                            && operation.getRequestBody().getContent() != null) {
+                        operation.getRequestBody().getContent().values().forEach(media -> {
+                            String ref = media.getSchema() == null
+                                    ? null
+                                    : media.getSchema().get$ref();
+                            if (ref != null) {
+                                names.add(ref.substring(ref.lastIndexOf('/') + 1));
+                            }
+                        });
+                    }
+                }));
+        return names;
     }
 
     private static Schema<?> problemSchema() {

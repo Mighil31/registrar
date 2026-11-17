@@ -1,0 +1,743 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-17T17:19:11+00:00",
+  "title": "Design System: Registrar",
+  "extensions": {
+    "colorMeta": {
+      "rail": {
+        "role": "primary",
+        "displayName": "Registrar Green",
+        "canonical": "#17392b",
+        "oklch": "oklch(31.4% 0.048 164)",
+        "cssVar": "--color-rail",
+        "tonalRamp": [
+          "#030e09",
+          "#162920",
+          "#2d463b",
+          "#466657",
+          "#688979",
+          "#90ac9e",
+          "#bad1c5",
+          "#e1f4ea"
+        ]
+      },
+      "rail-deep": {
+        "role": "primary",
+        "displayName": "Deep Registrar",
+        "canonical": "#0e2219",
+        "oklch": "oklch(23.2% 0.032 163)",
+        "cssVar": "--color-rail-deep",
+        "tonalRamp": [
+          "#060d09",
+          "#1b2721",
+          "#34443c",
+          "#4f6359",
+          "#71867b",
+          "#97aaa0",
+          "#c0cfc7",
+          "#e6f2eb"
+        ]
+      },
+      "rail-line": {
+        "role": "primary",
+        "displayName": "Rail Line",
+        "canonical": "#2b5241",
+        "oklch": "oklch(40.4% 0.053 164)",
+        "cssVar": "--color-rail-line",
+        "tonalRamp": [
+          "#020f08",
+          "#132920",
+          "#2a473a",
+          "#436756",
+          "#648a78",
+          "#8dad9e",
+          "#b7d2c5",
+          "#dff4ea"
+        ]
+      },
+      "rail-ink": {
+        "role": "primary",
+        "displayName": "Rail Ink",
+        "canonical": "#dce7e0",
+        "oklch": "oklch(91.8% 0.015 158)",
+        "cssVar": "--color-rail-ink",
+        "tonalRamp": [
+          "#090c0a",
+          "#202522",
+          "#3b423d",
+          "#57605b",
+          "#7a837d",
+          "#9fa7a2",
+          "#c6ccc8",
+          "#ebf0ed"
+        ]
+      },
+      "rail-muted": {
+        "role": "primary",
+        "displayName": "Rail Muted",
+        "canonical": "#a9c2b5",
+        "oklch": "oklch(79.1% 0.033 163)",
+        "cssVar": "--color-rail-muted",
+        "tonalRamp": [
+          "#050d09",
+          "#1b2721",
+          "#34443c",
+          "#4f6359",
+          "#70867b",
+          "#97aaa0",
+          "#bfcfc7",
+          "#e5f2eb"
+        ]
+      },
+      "gold": {
+        "role": "secondary",
+        "displayName": "Office Gold",
+        "canonical": "#e9b23a",
+        "oklch": "oklch(79.4% 0.145 83)",
+        "cssVar": "--color-gold",
+        "tonalRamp": [
+          "#110a00",
+          "#312100",
+          "#523b05",
+          "#785707",
+          "#a37806",
+          "#c79e49",
+          "#e8c585",
+          "#feeccc"
+        ]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Office Ground",
+        "canonical": "#f3f4f1",
+        "oklch": "oklch(96.6% 0.004 122)",
+        "cssVar": "--color-ground",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#242423",
+          "#3f403e",
+          "#5d5e5c",
+          "#80807e",
+          "#a4a5a3",
+          "#cacbc9",
+          "#eeefed"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel White",
+        "canonical": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 90)",
+        "cssVar": "--color-panel",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#808080",
+          "#a4a4a4",
+          "#cacaca",
+          "#eeeeee"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#d5dbd6",
+        "oklch": "oklch(88.5% 0.009 151)",
+        "cssVar": "--color-line",
+        "tonalRamp": [
+          "#0a0c0a",
+          "#222523",
+          "#3d413e",
+          "#5a5f5b",
+          "#7d827d",
+          "#a1a6a2",
+          "#c8ccc8",
+          "#ecefed"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "#eef1ee",
+        "oklch": "oklch(95.5% 0.005 146)",
+        "cssVar": "--color-rule",
+        "tonalRamp": [
+          "#0a0b0a",
+          "#232423",
+          "#3e403e",
+          "#5c5e5c",
+          "#7e817e",
+          "#a3a5a3",
+          "#c9cbc9",
+          "#edefed"
+        ]
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Field Stroke",
+        "canonical": "#c2cbc4",
+        "oklch": "oklch(83.3% 0.014 153)",
+        "cssVar": "--color-field",
+        "tonalRamp": [
+          "#090c0a",
+          "#212522",
+          "#3c413d",
+          "#59605a",
+          "#7b837c",
+          "#a0a7a1",
+          "#c6ccc8",
+          "#ebf0ec"
+        ]
+      },
+      "track": {
+        "role": "neutral",
+        "displayName": "Track",
+        "canonical": "#e4e8e4",
+        "oklch": "oklch(92.7% 0.007 146)",
+        "cssVar": "--color-track",
+        "tonalRamp": [
+          "#0a0c0a",
+          "#232523",
+          "#3e403e",
+          "#5b5f5b",
+          "#7e817e",
+          "#a2a5a2",
+          "#c9cbc9",
+          "#edefed"
+        ]
+      },
+      "quiet": {
+        "role": "neutral",
+        "displayName": "Quiet",
+        "canonical": "#eef1ee",
+        "oklch": "oklch(95.5% 0.005 146)",
+        "cssVar": "--color-quiet",
+        "tonalRamp": [
+          "#0a0b0a",
+          "#232423",
+          "#3e403e",
+          "#5c5e5c",
+          "#7e817e",
+          "#a3a5a3",
+          "#c9cbc9",
+          "#edefed"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#14201a",
+        "oklch": "oklch(23.0% 0.021 163)",
+        "cssVar": "--color-ink",
+        "tonalRamp": [
+          "#080d0a",
+          "#1f2622",
+          "#39423d",
+          "#55615a",
+          "#76847d",
+          "#9ca8a2",
+          "#c3cdc8",
+          "#e9f1ec"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "#46564d",
+        "oklch": "oklch(43.7% 0.025 161)",
+        "cssVar": "--color-muted",
+        "tonalRamp": [
+          "#070d09",
+          "#1e2621",
+          "#37433c",
+          "#536259",
+          "#75857c",
+          "#9ba9a0",
+          "#c2cec7",
+          "#e8f1ec"
+        ]
+      },
+      "faint": {
+        "role": "neutral",
+        "displayName": "Faint",
+        "canonical": "#4f5f56",
+        "oklch": "oklch(46.9% 0.024 161)",
+        "cssVar": "--color-faint",
+        "tonalRamp": [
+          "#070d09",
+          "#1e2622",
+          "#37433c",
+          "#536259",
+          "#75857c",
+          "#9ba8a1",
+          "#c2cec7",
+          "#e8f1ec"
+        ]
+      },
+      "placeholder": {
+        "role": "neutral",
+        "displayName": "Placeholder",
+        "canonical": "#66756c",
+        "oklch": "oklch(54.7% 0.023 159)",
+        "tonalRamp": [
+          "#070d09",
+          "#1e2622",
+          "#38433c",
+          "#546159",
+          "#76847c",
+          "#9ca8a1",
+          "#c3cdc7",
+          "#e9f1ec"
+        ]
+      },
+      "canary": {
+        "role": "tertiary",
+        "displayName": "Canary Copy",
+        "canonical": "#fff1a8",
+        "oklch": "oklch(95.3% 0.093 99)",
+        "cssVar": "--color-canary",
+        "tonalRamp": [
+          "#0e0b00",
+          "#2b2401",
+          "#4a4008",
+          "#6a5e1d",
+          "#8d8140",
+          "#b0a670",
+          "#d4cca0",
+          "#f6f0cd"
+        ]
+      },
+      "canary-row": {
+        "role": "tertiary",
+        "displayName": "Canary Row",
+        "canonical": "#fffbe6",
+        "oklch": "oklch(98.6% 0.028 98)",
+        "cssVar": "--color-canary-row",
+        "tonalRamp": [
+          "#0d0b05",
+          "#26241b",
+          "#434033",
+          "#615e4e",
+          "#84816f",
+          "#a8a596",
+          "#cdcbbe",
+          "#f1efe5"
+        ]
+      },
+      "canary-line": {
+        "role": "tertiary",
+        "displayName": "Canary Line",
+        "canonical": "#e2cf6e",
+        "oklch": "oklch(85.0% 0.120 98)",
+        "cssVar": "--color-canary-line",
+        "tonalRamp": [
+          "#0f0b00",
+          "#2a2403",
+          "#4a4003",
+          "#6c5e03",
+          "#928021",
+          "#b4a65e",
+          "#d7cc93",
+          "#f8f0c3"
+        ]
+      },
+      "canary-ink": {
+        "role": "tertiary",
+        "displayName": "Canary Ink",
+        "canonical": "#6b4b00",
+        "oklch": "oklch(43.6% 0.090 80)",
+        "cssVar": "--color-canary-ink",
+        "tonalRamp": [
+          "#120900",
+          "#312102",
+          "#533b0b",
+          "#765820",
+          "#9a7b42",
+          "#bca071",
+          "#dec7a1",
+          "#feecce"
+        ]
+      },
+      "pink": {
+        "role": "tertiary",
+        "displayName": "Pink Copy",
+        "canonical": "#f9cfd9",
+        "oklch": "oklch(89.3% 0.049 2)",
+        "cssVar": "--color-pink",
+        "tonalRamp": [
+          "#13070a",
+          "#311e23",
+          "#51373e",
+          "#74535b",
+          "#98757e",
+          "#ba9ba2",
+          "#ddc3c9",
+          "#fde8ed"
+        ]
+      },
+      "pink-row": {
+        "role": "tertiary",
+        "displayName": "Pink Row",
+        "canonical": "#fdf1f4",
+        "oklch": "oklch(96.8% 0.013 0)",
+        "cssVar": "--color-pink-row",
+        "tonalRamp": [
+          "#0e0a0b",
+          "#282224",
+          "#453e3f",
+          "#645b5d",
+          "#877d80",
+          "#aba2a4",
+          "#d0c8ca",
+          "#f3edee"
+        ]
+      },
+      "pink-line": {
+        "role": "tertiary",
+        "displayName": "Pink Line",
+        "canonical": "#e9a3b5",
+        "oklch": "oklch(78.8% 0.086 2)",
+        "cssVar": "--color-pink-line",
+        "tonalRamp": [
+          "#19040a",
+          "#391822",
+          "#5c303d",
+          "#824a5a",
+          "#a96c7c",
+          "#c993a1",
+          "#eabcc7",
+          "#fee8ed"
+        ]
+      },
+      "red": {
+        "role": "tertiary",
+        "displayName": "Docket Red",
+        "canonical": "#a3123a",
+        "oklch": "oklch(46.2% 0.175 14)",
+        "cssVar": "--color-red",
+        "tonalRamp": [
+          "#1d0105",
+          "#480315",
+          "#761029",
+          "#a32842",
+          "#cf4d62",
+          "#ed7e8b",
+          "#fab6bb",
+          "#fee8e9"
+        ]
+      },
+      "red-ink": {
+        "role": "tertiary",
+        "displayName": "Red Ink",
+        "canonical": "#5c0a21",
+        "oklch": "oklch(31.1% 0.113 12)",
+        "cssVar": "--color-red-ink",
+        "tonalRamp": [
+          "#1d0106",
+          "#40121b",
+          "#652933",
+          "#8e424e",
+          "#b6646f",
+          "#d68d96",
+          "#f5b8be",
+          "#fee8ea"
+        ]
+      },
+      "mint": {
+        "role": "tertiary",
+        "displayName": "Mint Copy",
+        "canonical": "#e3eee7",
+        "oklch": "oklch(93.9% 0.015 158)",
+        "cssVar": "--color-mint",
+        "tonalRamp": [
+          "#090c0a",
+          "#202522",
+          "#3b423d",
+          "#58605b",
+          "#7a837d",
+          "#9fa7a2",
+          "#c6ccc8",
+          "#ebf0ed"
+        ]
+      },
+      "go": {
+        "role": "tertiary",
+        "displayName": "Go Green",
+        "canonical": "#2f6b4f",
+        "oklch": "oklch(47.9% 0.078 161)",
+        "cssVar": "--color-go",
+        "tonalRamp": [
+          "#010f07",
+          "#082b1c",
+          "#1e4a35",
+          "#356a50",
+          "#578e72",
+          "#83b198",
+          "#afd5c0",
+          "#d9f7e6"
+        ]
+      },
+      "filling": {
+        "role": "tertiary",
+        "displayName": "Filling Amber",
+        "canonical": "#b07d0a",
+        "oklch": "oklch(62.5% 0.127 79)",
+        "tonalRamp": [
+          "#120900",
+          "#312001",
+          "#543b08",
+          "#7a560e",
+          "#a67613",
+          "#c69d58",
+          "#e7c58f",
+          "#feecd0"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page titles and the event header title; 32px on Sign in / Sign up."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "The dashboard's plain line of key numbers."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Member-copy titles (21px) and dialog titles (20px)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Panel titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Tables, lists, forms and panel content."
+      },
+      "body-lead": {
+        "displayName": "Body Lead",
+        "purpose": "Page leads and event descriptions, max 70ch."
+      },
+      "code": {
+        "displayName": "Catalogue Code",
+        "purpose": "Display-only event codes such as WKS 1123."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Table headers, definition terms, rail group labels; sentence case."
+      },
+      "stamp": {
+        "displayName": "Stamp",
+        "purpose": "Stamps only; capitals in a 2px border."
+      }
+    },
+    "shadows": [
+      {
+        "name": "paper-rest",
+        "value": "0 1px 2px rgba(20,32,26,.08)",
+        "purpose": "Member copies in My events."
+      },
+      {
+        "name": "sample-copy",
+        "value": "0 2px 4px rgba(0,0,0,.18), 0 12px 28px rgba(0,0,0,.18)",
+        "purpose": "The sample copy on the green auth panel."
+      },
+      {
+        "name": "dialog",
+        "value": "0 2px 4px rgba(20,32,26,.12), 0 18px 40px rgba(20,32,26,.22)",
+        "purpose": "Confirm dialog over an Ink 45% overlay."
+      },
+      {
+        "name": "tab-underline",
+        "value": "inset 0 -3px 0 var(--color-rail)",
+        "purpose": "Selected My events tab; a rule, not depth."
+      },
+      {
+        "name": "focus",
+        "value": "outline: 2px solid var(--color-ink); outline-offset: 2px",
+        "purpose": "Global focus ring; Gold on the rail."
+      }
+    ],
+    "motion": [
+      {
+        "name": "stamp-land",
+        "value": "260ms cubic-bezier(0.16, 1, 0.3, 1) both; from scale(1.35) rotate(-6deg) opacity 0, 60% scale(0.97) rotate(-1deg)",
+        "purpose": "REGISTERED stamp pressed on after a successful Register. Off under prefers-reduced-motion."
+      },
+      {
+        "name": "copy-tint",
+        "value": "420ms ease-out both; background from panel white",
+        "purpose": "Event header's canary tint fading in with the stamp. Off under prefers-reduced-motion."
+      },
+      {
+        "name": "state-colour",
+        "value": "150ms (Tailwind default ease)",
+        "purpose": "Hover colour transitions on buttons, chips and rail links."
+      },
+      {
+        "name": "seat-fill",
+        "value": "width 300ms ease-out",
+        "purpose": "Seat-bar fill width."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px",
+        "purpose": "Auth panel side padding widens."
+      },
+      {
+        "name": "md",
+        "value": "768px",
+        "purpose": "Rail replaces the top bar; admin tables replace stacked entries."
+      },
+      {
+        "name": "lg",
+        "value": "1024px",
+        "purpose": "Sign in / Sign up split into green panel and form."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Registrar Green action: New event, Register, Save.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">New event</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 16px;border-radius:6px;font:600 14px/1 var(--font-sans,'Public Sans Variable',system-ui,sans-serif);white-space:nowrap;cursor:pointer;transition:background-color 150ms,color 150ms,border-color 150ms}.ds-btn:focus-visible{outline:2px solid var(--color-ink,#14201a);outline-offset:2px}.ds-btn:disabled{opacity:.55;cursor:not-allowed}.ds-btn-primary{background:var(--color-rail,#17392b);color:#fff;border:1px solid var(--color-rail,#17392b)}.ds-btn-primary:hover{background:var(--color-rail-deep,#0e2219)}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Green outline for a second action beside a primary.",
+      "html": "<button class=\"ds-btn ds-btn-secondary\">Add people</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 16px;border-radius:6px;font:600 14px/1 var(--font-sans,'Public Sans Variable',system-ui,sans-serif);cursor:pointer;transition:background-color 150ms}.ds-btn:focus-visible{outline:2px solid var(--color-ink,#14201a);outline-offset:2px}.ds-btn-secondary{background:#fff;color:var(--color-rail,#17392b);border:1px solid var(--color-rail,#17392b)}.ds-btn-secondary:hover{background:var(--color-mint,#e3eee7)}"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "The default button: Leave, Previous, Keep it.",
+      "html": "<button class=\"ds-btn ds-btn-quiet\">Leave event</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 16px;border-radius:6px;font:600 14px/1 var(--font-sans,'Public Sans Variable',system-ui,sans-serif);cursor:pointer;transition:background-color 150ms}.ds-btn:focus-visible{outline:2px solid var(--color-ink,#14201a);outline-offset:2px}.ds-btn-quiet{background:#fff;color:var(--color-ink,#14201a);border:1px solid var(--color-field,#c2cbc4)}.ds-btn-quiet:hover{background:var(--color-quiet,#eef1ee)}"
+    },
+    {
+      "name": "Danger Button",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "Outlined red for destructive triggers; solid red only inside the confirm dialog.",
+      "html": "<button class=\"ds-btn ds-btn-danger\">Delete event</button> <button class=\"ds-btn ds-btn-danger-solid\">Delete</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 16px;border-radius:6px;font:600 14px/1 var(--font-sans,'Public Sans Variable',system-ui,sans-serif);cursor:pointer;transition:background-color 150ms}.ds-btn:focus-visible{outline:2px solid var(--color-ink,#14201a);outline-offset:2px}.ds-btn-danger{background:#fff;color:var(--color-red,#a3123a);border:1px solid var(--color-red,#a3123a)}.ds-btn-danger:hover{background:var(--color-pink-row,#fdf1f4)}.ds-btn-danger-solid{background:var(--color-red,#a3123a);color:#fff;border:1px solid var(--color-red,#a3123a)}.ds-btn-danger-solid:hover{background:var(--color-red-ink,#5c0a21)}"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Labelled 44px input with hint or error below.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-email\">Email</label><input id=\"ds-email\" class=\"ds-field-input\" placeholder=\"you@example.com\"><p class=\"ds-field-hint\">We only use it to sign you in.</p></div>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:6px;font-family:var(--font-sans,'Public Sans Variable',system-ui,sans-serif);max-width:360px}.ds-field-label{font-size:14px;font-weight:600;color:var(--color-ink,#14201a)}.ds-field-input{height:44px;border:1px solid var(--color-field,#c2cbc4);border-radius:6px;background:#fff;padding:0 12px;font:inherit;font-size:16px;color:var(--color-ink,#14201a)}.ds-field-input::placeholder{color:#66756c}.ds-field-input:focus-visible{outline:2px solid var(--color-ink,#14201a);outline-offset:2px}.ds-field-hint{margin:0;font-size:14px;color:var(--color-muted,#46564d)}"
+    },
+    {
+      "name": "Rail Navigation",
+      "kind": "nav",
+      "refersTo": "rail-link",
+      "description": "The green rail with the gold current-page marker.",
+      "html": "<nav class=\"ds-rail\"><div class=\"ds-rail-mark\">Registrar</div><div class=\"ds-rail-group\">Admin</div><a class=\"ds-rail-link ds-rail-current\" href=\"#\">Dashboard</a><a class=\"ds-rail-link\" href=\"#\">Events</a><a class=\"ds-rail-link\" href=\"#\">People</a><div class=\"ds-rail-group\">Member</div><a class=\"ds-rail-link\" href=\"#\">Browse</a><a class=\"ds-rail-link\" href=\"#\">My events <span>2</span></a></nav>",
+      "css": ".ds-rail{display:flex;flex-direction:column;gap:2px;width:232px;padding:24px 16px;background:var(--color-rail,#17392b);font-family:var(--font-sans,'Public Sans Variable',system-ui,sans-serif)}.ds-rail-mark{padding:0 10px 22px;margin-bottom:14px;border-bottom:1px solid var(--color-rail-line,#2b5241);font-size:19px;font-weight:800;color:#fff}.ds-rail-group{padding:18px 10px 6px;font-size:12px;font-weight:600;color:var(--color-rail-muted,#a9c2b5)}.ds-rail-link{display:flex;align-items:center;justify-content:space-between;min-height:44px;padding:0 10px;border-radius:6px;font-size:14px;font-weight:500;color:var(--color-rail-ink,#dce7e0);text-decoration:none;transition:background-color 150ms,color 150ms}.ds-rail-link span{font-size:13px;font-weight:600}.ds-rail-link:hover{background:var(--color-rail-line,#2b5241);color:#fff}.ds-rail-link:focus-visible{outline:2px solid var(--color-gold,#e9b23a);outline-offset:2px}.ds-rail-current,.ds-rail-current:hover{background:var(--color-gold,#e9b23a);color:var(--color-rail,#17392b);font-weight:700}"
+    },
+    {
+      "name": "Filter Chips",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "One-pressed filter group: All / Admins / Members.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip\" aria-pressed=\"true\">All</button><button class=\"ds-chip\" aria-pressed=\"false\">Admins</button><button class=\"ds-chip\" aria-pressed=\"false\">Members</button></div>",
+      "css": ".ds-chips{display:flex;flex-wrap:wrap;gap:8px}.ds-chip{height:44px;padding:0 14px;border-radius:6px;border:1px solid var(--color-field,#c2cbc4);background:#fff;color:var(--color-muted,#46564d);font:600 13px var(--font-sans,'Public Sans Variable',system-ui,sans-serif);cursor:pointer;transition:border-color 150ms,color 150ms}.ds-chip:hover{border-color:var(--color-ink,#14201a);color:var(--color-ink,#14201a)}.ds-chip:focus-visible{outline:2px solid var(--color-ink,#14201a);outline-offset:2px}.ds-chip[aria-pressed=true]{background:var(--color-ink,#14201a);border-color:var(--color-ink,#14201a);color:#fff}"
+    },
+    {
+      "name": "Stamps",
+      "kind": "custom",
+      "refersTo": "stamp-registered",
+      "description": "2px-bordered caps stamps; Access and Availability are separate stamps.",
+      "html": "<div class=\"ds-stamps\"><span class=\"ds-stamp ds-stamp-open\">OPEN</span><span class=\"ds-stamp ds-stamp-private\">PRIVATE</span><span class=\"ds-stamp ds-stamp-closed\">FULL</span><span class=\"ds-stamp ds-stamp-registered ds-stamp-land\">REGISTERED</span><span class=\"ds-stamp ds-stamp-admin\">ADMIN</span></div>",
+      "css": ".ds-stamps{display:flex;flex-wrap:wrap;gap:8px;font-family:var(--font-sans,'Public Sans Variable',system-ui,sans-serif)}.ds-stamp{display:inline-block;font-size:11px;line-height:1.2;font-weight:800;letter-spacing:.08em;padding:3px 7px;border:2px solid currentColor;border-radius:3px;white-space:nowrap}.ds-stamp-open{color:var(--color-go,#2f6b4f);background:#fff}.ds-stamp-private{color:var(--color-ink,#14201a);background:var(--color-quiet,#eef1ee)}.ds-stamp-closed{color:var(--color-red,#a3123a);background:var(--color-pink,#f9cfd9)}.ds-stamp-registered{color:var(--color-go,#2f6b4f);background:var(--color-canary,#fff1a8)}.ds-stamp-admin{color:var(--color-rail,#17392b);background:var(--color-mint,#e3eee7)}@keyframes ds-stamp-land{from{transform:scale(1.35) rotate(-6deg);opacity:0}60%{transform:scale(.97) rotate(-1deg);opacity:1}to{transform:none}}.ds-stamp-land{animation:ds-stamp-land 260ms cubic-bezier(.16,1,.3,1) both}@media (prefers-reduced-motion:reduce){.ds-stamp-land{animation:none}}"
+    },
+    {
+      "name": "Member Copy",
+      "kind": "card",
+      "refersTo": "member-copy",
+      "description": "A registration as a canary carbon copy (pink once cancelled).",
+      "html": "<article class=\"ds-copy\"><div class=\"ds-copy-top\"><span>WKS 1120</span><span>REGISTERED SAT 7 NOV</span></div><h2 class=\"ds-copy-title\">Intro to aggregation pipelines</h2><dl class=\"ds-copy-grid\"><div><dt>When</dt><dd>Fri 20 Nov · 15:30</dd></div><div><dt>Where</dt><dd>Room 4.01</dd></div><div><dt>Going</dt><dd>18</dd></div></dl><div class=\"ds-copy-foot\"><span class=\"ds-copy-stamp\">REGISTERED</span><button class=\"ds-copy-btn\">Leave</button></div></article>",
+      "css": ".ds-copy{display:flex;flex-direction:column;gap:10px;max-width:420px;padding:18px 20px;border:1px solid var(--color-canary-line,#e2cf6e);border-radius:4px;background:var(--color-canary,#fff1a8);box-shadow:0 1px 2px rgba(20,32,26,.08);color:var(--color-ink,#14201a);font-family:var(--font-sans,'Public Sans Variable',system-ui,sans-serif);font-variant-numeric:tabular-nums}.ds-copy-top{display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:700;color:var(--color-canary-ink,#6b4b00)}.ds-copy-title{margin:0;font-size:21px;font-weight:800}.ds-copy-grid{margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-top:10px;border-top:1px solid var(--color-canary-line,#e2cf6e);font-size:14px}.ds-copy-grid dt{font-size:12px;font-weight:600;color:var(--color-canary-ink,#6b4b00)}.ds-copy-grid dd{margin:0}.ds-copy-foot{display:flex;align-items:center;justify-content:space-between;min-height:44px}.ds-copy-stamp{font-size:11px;font-weight:800;letter-spacing:.08em;padding:3px 7px;border:2px solid currentColor;border-radius:3px;color:var(--color-go,#2f6b4f)}.ds-copy-btn{height:44px;padding:0 16px;border-radius:6px;border:1px solid var(--color-field,#c2cbc4);background:#fff;font:600 14px inherit;cursor:pointer}.ds-copy-btn:hover{background:var(--color-quiet,#eef1ee)}.ds-copy-btn:focus-visible{outline:2px solid var(--color-ink,#14201a);outline-offset:2px}"
+    },
+    {
+      "name": "Seat Bar",
+      "kind": "custom",
+      "refersTo": "seat-bar",
+      "description": "Count plus percent-full bar: green open, amber near full, red full.",
+      "html": "<div class=\"ds-seats\"><div class=\"ds-seat\"><b>18</b> <span>/ 30</span><div class=\"ds-bar\"><i style=\"width:60%\"></i></div></div><div class=\"ds-seat\"><b>11</b> <span>/ 12</span><div class=\"ds-bar\"><i class=\"ds-filling\" style=\"width:92%\"></i></div></div><div class=\"ds-seat\"><b>8</b> <span>/ 8</span><div class=\"ds-bar\"><i class=\"ds-full\" style=\"width:100%\"></i></div></div></div>",
+      "css": ".ds-seats{display:flex;flex-direction:column;gap:14px;width:140px;font:14px var(--font-sans,'Public Sans Variable',system-ui,sans-serif);font-variant-numeric:tabular-nums;color:var(--color-ink,#14201a)}.ds-seat b{font-weight:700}.ds-seat span{font-weight:500;color:var(--color-faint,#4f5f56)}.ds-bar{height:8px;margin-top:6px;border-radius:4px;background:var(--color-track,#e4e8e4);overflow:hidden}.ds-bar i{display:block;height:100%;border-radius:4px;background:var(--color-rail,#17392b);transition:width 300ms ease-out}.ds-bar i.ds-filling{background:#b07d0a}.ds-bar i.ds-full{background:var(--color-red,#a3123a)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Enrolment Office",
+    "overview": "**Creative North Star: \"The Enrolment Office\"**\n\nRegistrar is a registrar's office rendered as software: a course catalogue on one side, carbonless enrolment forms on the other. Every event carries a catalogue code (its first tag's prefix and its start date, like `WKS 1123`), and every registration is a copy of a form, tinted the way multi-part forms are tinted: canary for the member's own copy, pink for a closed or cancelled one, mint for one an admin filed. State is stamped onto those copies in 2px-bordered capitals. The office is calm, dense and official; it reads as records, not as a marketing dashboard.\n\nThe frame is a deep registrar-green rail with a gold marker for the current page, a pale ground, and flat white panels with hairline borders. One face does all the work, Public Sans with tabular figures, so columns of counts, times and codes line up across rows. Weight, not a second family, carries hierarchy: extra-bold for titles and figures, bold for codes and names, regular for everything read.\n\nThe system refuses the grey KPI-card dashboard with one blue accent. Numbers sit in a plain line, not in cards; colour is spent on state, never on decoration.",
+    "keyCharacteristics": [
+      "Green rail with a gold current-page marker; pale ground; flat white panels with 1px hairlines.",
+      "Form-copy tints carry state: canary (yours), pink (closed, cancelled, full), mint (added by an admin).",
+      "Stamps: 11px extra-bold capitals in a 2px border of their own colour.",
+      "One face, Public Sans, with tabular figures everywhere.",
+      "Columns align across rows; on phones, rows become stacked entries and the selected one expands in place.",
+      "One authored motion: the REGISTERED stamp pressed onto the copy."
+    ],
+    "rules": [
+      {
+        "name": "The Carbon Copy Rule",
+        "body": "Canary, pink and mint mean exactly one thing each: yours, closed, filed by an admin. They are never decorative, and a tinted surface always carries a word (a stamp or tag) that says the same thing, so colour is never the only signal.",
+        "section": "colors"
+      },
+      {
+        "name": "The Gold Marker Rule",
+        "body": "Gold marks where you are in the rail. It does not appear in the content area.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Face Rule",
+        "body": "Public Sans is the only family. Hierarchy comes from weight (400 to 800) and size, never from a second face.",
+        "section": "typography"
+      },
+      {
+        "name": "The Capitals Belong To Stamps Rule",
+        "body": "Uppercase is reserved for stamps, copy tags and the copy's registration line. Headings, table headers and labels stay in sentence case.",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper Only Rule",
+        "body": "Panels, tables and buttons never cast shadows. A shadow means a copy of a form or a dialog.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** give every event its catalogue code (first-tag prefix + MMDD, e.g. `WKS 1123`), set in 13px bold. It is display-only: never store, search or sort by it.",
+      "**Do** show Access (OPEN / PRIVATE) and Availability (FULL / STARTED / CANCELLED) as two separate stamps.",
+      "**Do** put state on form-copy tints with a word on them: canary for the viewer's own registration, pink for closed or cancelled, mint for added by an admin.",
+      "**Do** keep tabular figures on and align numbers across rows.",
+      "**Do** turn admin tables into stacked entries below 768px, and expand the selected entry in place.",
+      "**Do** keep every interactive target at least 44px tall and every focus visible (2px Ink outline, Gold on the rail).",
+      "**Do** keep motion to the REGISTERED stamp landing and the header's canary fade, both off under reduced motion; elsewhere only 150ms colour transitions."
+    ],
+    "donts": [
+      "**Don't** build the grey KPI-card dashboard with one blue accent; key numbers sit in one plain line of figures.",
+      "**Don't** merge Access and Availability into one badge, or let FULL hide PRIVATE.",
+      "**Don't** use canary, pink or mint as decoration, or use colour as the only signal of state.",
+      "**Don't** add a second typeface or a display face; Public Sans carries every role.",
+      "**Don't** put shadows on panels, tables or buttons; shadows belong to paper copies and dialogs.",
+      "**Don't** set headings, table headers or labels in capitals; capitals belong to stamps and copy tags.",
+      "**Don't** use Gold outside the rail's wayfinding."
+    ]
+  }
+}

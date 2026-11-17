@@ -1,5 +1,6 @@
 package io.github.mighil31.registrar.event;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.Instant;
 import java.util.List;
 
@@ -10,14 +11,14 @@ import java.util.List;
 public record EventResponse(
         String id,
         String title,
-        String description,
+        @Schema(nullable = true) String description,
         Event.Format format,
-        String location,
-        String meetingLink,
+        @Schema(nullable = true) String location,
+        @Schema(nullable = true) String meetingLink,
         Instant startsAt,
         Instant endsAt,
         Event.Mode mode,
-        Integer capacity,
+        @Schema(nullable = true) Integer capacity,
         int registeredCount,
         List<String> tags,
         Event.Status status,

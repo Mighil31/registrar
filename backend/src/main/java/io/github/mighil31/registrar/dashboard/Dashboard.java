@@ -1,6 +1,7 @@
 package io.github.mighil31.registrar.dashboard;
 
 import io.github.mighil31.registrar.event.Event;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.Instant;
 import java.util.List;
 
@@ -28,10 +29,19 @@ public record Dashboard(
             String title,
             Instant startsAt,
             Event.Mode mode,
-            Integer capacity,
+            Event.Format format,
+            @Schema(nullable = true) String location,
+            List<String> tags,
+            @Schema(nullable = true) Integer capacity,
             int registeredCount,
-            Integer percentFull) {}
+            @Schema(nullable = true) Integer percentFull) {}
 
+    /** @param addedByAdmin an admin added them, rather than they registered themselves */
     public record RecentRegistration(
-            String eventId, String eventTitle, String userId, String userName, Instant registeredAt) {}
+            String eventId,
+            String eventTitle,
+            String userId,
+            String userName,
+            Instant registeredAt,
+            boolean addedByAdmin) {}
 }

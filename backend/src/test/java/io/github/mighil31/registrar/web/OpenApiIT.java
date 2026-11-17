@@ -3,21 +3,26 @@ package io.github.mighil31.registrar.web;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.github.mighil31.registrar.ApiIT;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import tools.jackson.databind.json.JsonMapper;
 
 /** The OpenAPI document is public, covers the API, and says which calls need a token. */
 @SuppressWarnings({"rawtypes", "unchecked"})
 class OpenApiIT extends ApiIT {
 
     @Test
-    void describesTheApiAndItsBearerTokens() {
+    void describesTheApiAndItsBearerTokens() throws Exception {
         ResponseEntity<Map> response = api.get("/v3/api-docs");
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        // The web app's TypeScript types are generated from this file (npm run api in web/).
+        Files.writeString(Path.of("target", "openapi.json"), new JsonMapper().writeValueAsString(response.getBody()));
         Map spec = response.getBody();
         Map<String, Map> paths = (Map<String, Map>) spec.get("paths");
         assertThat(paths)

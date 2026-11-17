@@ -64,6 +64,9 @@ class DashboardService {
                                         .append("title", 1)
                                         .append("startsAt", 1)
                                         .append("mode", 1)
+                                        .append("format", 1)
+                                        .append("location", 1)
+                                        .append("tags", 1)
                                         .append("capacity", 1)
                                         .append("registeredCount", 1))),
                 // registrations (registeredAt_desc): count this week's...
@@ -84,7 +87,8 @@ class DashboardService {
                                         .append("userId", 1)
                                         .append("registeredAt", 1)
                                         .append("userName", "$user.name")
-                                        .append("eventTitle", "$event.title"))),
+                                        .append("eventTitle", "$event.title")
+                                        .append("addedByAdmin", new Document("$ne", List.of("$addedBy", "$userId"))))),
                 stage(
                         "$facet",
                         new Document("members", count("members"))
@@ -120,6 +124,9 @@ class DashboardService {
                 e.getString("title"),
                 e.getDate("startsAt").toInstant(),
                 Event.Mode.valueOf(e.getString("mode")),
+                Event.Format.valueOf(e.getString("format")),
+                e.getString("location"),
+                e.getList("tags", String.class, List.of()),
                 capacity,
                 registered,
                 capacity == null ? null : (int) Math.round(100.0 * registered / capacity));
@@ -131,7 +138,8 @@ class DashboardService {
                 r.getString("eventTitle"),
                 r.getObjectId("userId").toHexString(),
                 r.getString("userName"),
-                r.getDate("registeredAt").toInstant());
+                r.getDate("registeredAt").toInstant(),
+                r.getBoolean("addedByAdmin"));
     }
 
     /** {@code $count} on no documents outputs nothing at all, hence the empty case. */

@@ -295,7 +295,7 @@ public class DevSeed implements ApplicationRunner {
 
     private static Event event(Plan plan, ObjectId adminId, Instant now) {
         Instant startsAt =
-                now.plus(plan.startsIn()).truncatedTo(ChronoUnit.DAYS).plus(Duration.ofHours(17));
+                now.plus(plan.startsIn()).truncatedTo(ChronoUnit.DAYS).plus(Duration.ofHours(10));
         boolean online = plan.format() == Event.Format.ONLINE;
         Instant created = now.minus(Duration.ofDays(30));
         return new Event(

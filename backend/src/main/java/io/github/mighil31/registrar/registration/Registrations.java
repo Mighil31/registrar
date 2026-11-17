@@ -34,11 +34,10 @@ public class Registrations {
         if (eventIds.isEmpty()) {
             return Set.of();
         }
+        // Distinct ids, not a projection into Registration: a record can't be built from one field
+        // (its primitive overCapacity has no value).
         Query query = Query.query(where("userId").is(userId).and("eventId").in(eventIds));
-        query.fields().include("eventId");
-        return mongo.find(query, Registration.class).stream()
-                .map(Registration::eventId)
-                .collect(Collectors.toUnmodifiableSet());
+        return Set.copyOf(mongo.findDistinct(query, "eventId", Registration.class, ObjectId.class));
     }
 
     public boolean isRegistered(ObjectId eventId, ObjectId userId) {

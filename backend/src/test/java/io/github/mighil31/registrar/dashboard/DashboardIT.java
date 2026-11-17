@@ -48,7 +48,8 @@ class DashboardIT extends ApiIT {
                 .containsEntry("eventId", id(event))
                 .containsEntry("eventTitle", "Dashboard check")
                 .containsEntry("userId", member.id())
-                .containsEntry("userName", "Rhea Dashwood");
+                .containsEntry("userName", "Rhea Dashwood")
+                .containsEntry("addedByAdmin", false);
         assertThat((List<Map>) after.get("events"))
                 .filteredOn(row -> row.get("id").equals(id(event)))
                 .singleElement()
@@ -60,6 +61,17 @@ class DashboardIT extends ApiIT {
         assertThat((List) after.get("events")).hasSizeLessThanOrEqualTo(DashboardService.EVENT_ROWS);
         assertThat((List) after.get("recentRegistrations"))
                 .hasSizeLessThanOrEqualTo(DashboardService.RECENT_REGISTRATIONS);
+    }
+
+    @Test
+    void marksRegistrationsAnAdminMade() {
+        String event = id(event());
+        Account member = member("Ada Added");
+        api.post("/api/v1/events/" + event + "/registrations", Map.of("userIds", List.of(member.id())), admin.auth());
+
+        assertThat((Map) ((List) dashboard().get("recentRegistrations")).getFirst())
+                .containsEntry("userId", member.id())
+                .containsEntry("addedByAdmin", true);
     }
 
     @Test

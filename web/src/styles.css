@@ -1,0 +1,149 @@
+@import "@fontsource-variable/public-sans";
+@import "tailwindcss";
+
+/* Enrolment Office. A green rail, a pale ground, white panels; state lives in form-copy tints
+   (canary = your registration, pink = closed or cancelled, mint = added by an admin) and in
+   2px-bordered stamps. One face, tabular figures. */
+@theme {
+  --font-sans: "Public Sans Variable", system-ui, sans-serif;
+
+  --color-rail: #17392b;
+  --color-rail-line: #2b5241;
+  --color-rail-ink: #dce7e0;
+  --color-rail-muted: #a9c2b5;
+  --color-rail-deep: #0e2219;
+  --color-gold: #e9b23a;
+
+  --color-ground: #f3f4f1;
+  --color-panel: #ffffff;
+  --color-line: #d5dbd6;
+  --color-rule: #eef1ee;
+  --color-field: #c2cbc4;
+  --color-track: #e4e8e4;
+
+  --color-ink: #14201a;
+  --color-muted: #46564d;
+  --color-faint: #4f5f56;
+
+  --color-canary: #fff1a8;
+  --color-canary-row: #fffbe6;
+  --color-canary-line: #e2cf6e;
+  --color-canary-ink: #6b4b00;
+  --color-pink: #f9cfd9;
+  --color-pink-row: #fdf1f4;
+  --color-pink-line: #e9a3b5;
+  --color-red: #a3123a;
+  --color-red-ink: #5c0a21;
+  --color-mint: #e3eee7;
+  --color-go: #2f6b4f;
+  --color-filling: #b07d0a;
+  --color-quiet: #eef1ee;
+}
+
+@layer base {
+  html {
+    background: var(--color-ground);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+    scrollbar-color: #9aa79f var(--color-ground);
+    caret-color: var(--color-rail);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background: var(--color-canary);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  a {
+    color: var(--color-rail);
+    text-underline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #66756c;
+  }
+}
+
+@utility stamp {
+  display: inline-block;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 3px 7px;
+  border: 2px solid currentColor;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+@utility copy-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 1px 6px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+/* The one authored moment: a stamp pressed onto the form copy. Settles fast, no bounce. */
+@keyframes stamp-land {
+  from {
+    transform: scale(1.35) rotate(-6deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.97) rotate(-1deg);
+    opacity: 1;
+  }
+  to {
+    transform: none;
+  }
+}
+
+@utility stamp-land {
+  animation: stamp-land 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes copy-tint {
+  from {
+    background-color: var(--color-panel);
+  }
+}
+
+@utility copy-tint {
+  animation: copy-tint 420ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-land,
+  .copy-tint {
+    animation: none;
+  }
+}

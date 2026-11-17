@@ -11,3 +11,4 @@ web/.impeccable/mocks/
 web/.impeccable/review/
 web/.impeccable/questions/
 web/.impeccable/hook.cache.json
+*.tsbuildinfo

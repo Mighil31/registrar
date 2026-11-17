@@ -7,6 +7,7 @@ import io.github.mighil31.registrar.db.MongoTransaction;
 import io.github.mighil31.registrar.event.Event;
 import io.github.mighil31.registrar.user.User;
 import io.github.mighil31.registrar.web.ProblemException;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.Clock;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -214,7 +215,11 @@ class RegistrationService {
         return mongo.find(Query.query(where("eventId").is(eventId)).with(Sort.by("registeredAt")), Registration.class);
     }
 
-    record AddResult(List<String> added, List<String> alreadyRegistered, int registeredCount, Integer capacity) {}
+    record AddResult(
+            List<String> added,
+            List<String> alreadyRegistered,
+            int registeredCount,
+            @Schema(nullable = true) Integer capacity) {}
 
     private void removeAndFreeSeat(ObjectId eventId, ObjectId userId) {
         mongo.remove(Registrations.byEventAndUser(eventId, userId), Registration.class);

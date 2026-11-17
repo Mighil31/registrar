@@ -1,7 +1,7 @@
-# Local stack: MongoDB (single-node replica set, with auth) + the backend.
+# Local stack: MongoDB (single-node replica set, with auth), the backend, and the web app.
 #   cp .env.example .env   # then set real passwords
 #   docker compose up --build
-# Backend: http://localhost:8082   Probes: /livez, /readyz
+# App: http://localhost:8083   Backend: http://localhost:8082   Probes: /livez, /readyz
 # MongoDB from the host: mongodb://<user>:<pass>@localhost:27018/registrar?authSource=registrar&directConnection=true
 services:
   mongo:
@@ -57,6 +57,14 @@ services:
     depends_on:
       mongo:
         condition: service_healthy
+
+  web:
+    build: ./web
+    ports:
+      # Not 8081: that is the kitchensink port.
+      - "127.0.0.1:8083:8080"
+    depends_on:
+      - backend
 
 volumes:
   mongo-data:
