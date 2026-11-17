@@ -2,7 +2,7 @@ package io.github.mighil31.registrar.event;
 
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 
-import io.github.mighil31.registrar.db.Transactions;
+import io.github.mighil31.registrar.db.MongoTransaction;
 import io.github.mighil31.registrar.registration.Registrations;
 import io.github.mighil31.registrar.security.Caller;
 import io.github.mighil31.registrar.user.Permissions;
@@ -32,13 +32,11 @@ class EventService {
 
     private final MongoTemplate mongo;
     private final Registrations registrations;
-    private final Transactions transactions;
     private final Clock clock;
 
-    EventService(MongoTemplate mongo, Registrations registrations, Transactions transactions, Clock clock) {
+    EventService(MongoTemplate mongo, Registrations registrations, Clock clock) {
         this.mongo = mongo;
         this.registrations = registrations;
-        this.transactions = transactions;
         this.clock = clock;
     }
 
@@ -142,6 +140,7 @@ class EventService {
      * {@code registeredCount}, which registrations change at the same time. Title and start time are
      * copied into registrations, so those copies change in the same transaction.
      */
+    @MongoTransaction
     EventResponse update(ObjectId id, EventRequest request) {
         if (request.version() == null) {
             throw ProblemException.invalid("version", "is required when editing");
@@ -160,41 +159,35 @@ class EventService {
                 .set("tags", tags(request.tags()))
                 .set("updatedAt", clock.instant())
                 .inc("version", 1);
-        Event saved = transactions.run(() -> {
-            Event event = applyVersioned(id, request.version(), update);
-            registrations.copyEvent(event);
-            return event;
-        });
+        Event saved = applyVersioned(id, request.version(), update);
+        registrations.copyEvent(saved);
         return EventResponse.of(saved, false, true);
     }
 
     /** Registrations are kept: un-cancelling brings everyone back. */
+    @MongoTransaction
     EventResponse setStatus(ObjectId id, Event.Status status) {
-        Event saved = transactions.run(() -> {
-            Event event = mongo.findAndModify(
-                    Query.query(where("_id").is(id)),
-                    new Update()
-                            .set("status", status)
-                            .set("updatedAt", clock.instant())
-                            .inc("version", 1),
-                    FindAndModifyOptions.options().returnNew(true),
-                    Event.class);
-            if (event == null) {
-                throw ProblemException.notFound("Event");
-            }
-            registrations.copyEvent(event);
-            return event;
-        });
-        return EventResponse.of(saved, false, true);
+        Event event = mongo.findAndModify(
+                Query.query(where("_id").is(id)),
+                new Update()
+                        .set("status", status)
+                        .set("updatedAt", clock.instant())
+                        .inc("version", 1),
+                FindAndModifyOptions.options().returnNew(true),
+                Event.class);
+        if (event == null) {
+            throw ProblemException.notFound("Event");
+        }
+        registrations.copyEvent(event);
+        return EventResponse.of(event, false, true);
     }
 
+    @MongoTransaction
     void delete(ObjectId id) {
-        transactions.run(() -> {
-            if (mongo.remove(Query.query(where("_id").is(id)), Event.class).getDeletedCount() == 0) {
-                throw ProblemException.notFound("Event");
-            }
-            registrations.deleteForEvent(id);
-        });
+        if (mongo.remove(Query.query(where("_id").is(id)), Event.class).getDeletedCount() == 0) {
+            throw ProblemException.notFound("Event");
+        }
+        registrations.deleteForEvent(id);
     }
 
     private Event find(ObjectId id) {

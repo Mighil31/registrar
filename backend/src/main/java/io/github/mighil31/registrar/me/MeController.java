@@ -3,7 +3,7 @@ package io.github.mighil31.registrar.me;
 import io.github.mighil31.registrar.auth.AuthService;
 import io.github.mighil31.registrar.auth.InvalidRefreshTokenException;
 import io.github.mighil31.registrar.auth.RefreshCookie;
-import io.github.mighil31.registrar.db.Transactions;
+import io.github.mighil31.registrar.db.MongoTransaction;
 import io.github.mighil31.registrar.registration.Registrations;
 import io.github.mighil31.registrar.user.User;
 import io.github.mighil31.registrar.user.UserRepository;
@@ -35,7 +35,6 @@ class MeController {
     private final AuthService auth;
     private final RefreshCookie cookie;
     private final Registrations registrations;
-    private final Transactions transactions;
     private final Clock clock;
 
     MeController(
@@ -44,14 +43,12 @@ class MeController {
             AuthService auth,
             RefreshCookie cookie,
             Registrations registrations,
-            Transactions transactions,
             Clock clock) {
         this.users = users;
         this.passwordEncoder = passwordEncoder;
         this.auth = auth;
         this.cookie = cookie;
         this.registrations = registrations;
-        this.transactions = transactions;
         this.clock = clock;
     }
 
@@ -62,19 +59,17 @@ class MeController {
 
     /** A new name also goes into the copies in this user's registrations, in the same transaction. */
     @PatchMapping
+    @MongoTransaction
     UserResponse update(@AuthenticationPrincipal Jwt jwt, @Valid @RequestBody UpdateProfileRequest request) {
         User user = current(jwt);
         User updated = user.withProfile(
                 request.name() != null ? request.name() : user.name(),
                 request.phoneNumber() != null ? request.phoneNumber() : user.phoneNumber(),
                 clock.instant());
-        User saved = transactions.run(() -> {
-            User result = users.save(updated);
-            if (!result.name().equals(user.name())) {
-                registrations.copyUserName(result.id(), result.name());
-            }
-            return result;
-        });
+        User saved = users.save(updated);
+        if (!saved.name().equals(user.name())) {
+            registrations.copyUserName(saved.id(), saved.name());
+        }
         return UserResponse.of(saved);
     }
 
