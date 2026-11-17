@@ -196,6 +196,16 @@ class RegistrationService {
                 Registration.class);
     }
 
+    /** Everything a user is registered for, latest first: the People screen's side panel. */
+    List<Registration> ofUser(ObjectId userId) {
+        if (!mongo.exists(Query.query(where("_id").is(userId)), User.class)) {
+            throw ProblemException.notFound("User");
+        }
+        return mongo.find(
+                Query.query(where("userId").is(userId)).with(Sort.by(Sort.Direction.DESC, "event.startsAt")),
+                Registration.class);
+    }
+
     /** An event's attendees, in the order they registered. */
     List<Registration> attendees(ObjectId eventId) {
         if (!mongo.exists(Query.query(where("_id").is(eventId)), Event.class)) {

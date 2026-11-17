@@ -26,12 +26,19 @@ Prerequisites: Java 21, Maven, Docker.
 cp .env.example .env              # then change the passwords
 docker compose up --build         # http://localhost:8082, probes at /livez and /readyz
 
-# Or just the backend, on a throwaway MongoDB from Testcontainers
-mvn -f backend spring-boot:test-run
+# Or just the backend, on a throwaway MongoDB from Testcontainers (with demo data)
+REGISTRAR_DEV_SEED=true REGISTRAR_ADMIN_EMAIL=admin@example.com \
+  REGISTRAR_ADMIN_PASSWORD=change-me-admin-password mvn -f backend spring-boot:test-run
 
 # Build + unit and integration tests
 mvn -f backend verify
 ```
+
+The API is described by an OpenAPI document at `/v3/api-docs` (springdoc).
+
+`REGISTRAR_DEV_SEED=true` (`DEV_SEED` in `.env`) fills an empty database with demo data: 40 people,
+12 events and their registrations. Every seeded person signs in with the password `registrar-demo`
+(e.g. `dana.whitfield@registrar.example`, an admin). Never set it in production.
 
 MongoDB runs as a replica set because the app uses multi-document transactions (the last seat of an
 event, the last admin). The schema (collections, `$jsonSchema` validators, indexes, a TTL index for

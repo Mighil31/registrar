@@ -22,6 +22,7 @@
         <java.version>21</java.version>
         <jacoco.version>0.8.16</jacoco.version>
         <flamingock.version>1.4.5</flamingock.version>
+        <springdoc.version>3.2.0</springdoc.version>
     </properties>
 
     <dependencyManagement>
@@ -71,6 +72,12 @@
         <dependency>
             <groupId>io.flamingock</groupId>
             <artifactId>flamingock-mongodb-sync-auditstore</artifactId>
+        </dependency>
+        <!-- OpenAPI 3 spec at /v3/api-docs, from the controllers; the web client's types are generated from it. -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
 
         <dependency>

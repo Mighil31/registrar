@@ -81,6 +81,14 @@ public class AuthService {
         return refreshTokens.issue(userId);
     }
 
+    /**
+     * After admin was revoked or the user was deleted: no refresh works any more, so the next one
+     * means signing in again. Access tokens already issued still run out on their own (10 min).
+     */
+    public void endSessions(ObjectId userId) {
+        refreshTokens.revokeAll(userId);
+    }
+
     private Session newSession(User user) {
         return new Session(response(user), refreshTokens.issue(user.id()));
     }

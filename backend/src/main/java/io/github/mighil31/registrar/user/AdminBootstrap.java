@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -17,6 +18,7 @@ import org.springframework.util.StringUtils;
  * exists this does nothing, so changing the settings later can't take over an account.
  */
 @Component
+@Order(0) // before DevSeed, which would otherwise add the first admin
 @EnableConfigurationProperties(AdminProperties.class)
 class AdminBootstrap implements ApplicationRunner {
 

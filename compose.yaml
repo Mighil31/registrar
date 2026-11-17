@@ -48,6 +48,8 @@ services:
       REGISTRAR_ADMIN_EMAIL: ${ADMIN_EMAIL:?set in .env}
       REGISTRAR_ADMIN_PASSWORD: ${ADMIN_PASSWORD:?set in .env}
       REGISTRAR_ADMIN_NAME: ${ADMIN_NAME:-Admin}
+      # Demo data on an empty database (dev only).
+      REGISTRAR_DEV_SEED: ${DEV_SEED:-false}
       # No JWT keys: a key pair is generated per run (dev). Set REGISTRAR_JWT_PRIVATE_KEY/PUBLIC_KEY otherwise.
     ports:
       - "127.0.0.1:8082:8082"

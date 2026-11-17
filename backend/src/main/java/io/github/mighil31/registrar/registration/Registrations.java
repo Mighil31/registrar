@@ -4,10 +4,14 @@ import static org.springframework.data.mongodb.core.query.Criteria.where;
 
 import io.github.mighil31.registrar.event.Event;
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
@@ -60,6 +64,32 @@ public class Registrations {
 
     public void deleteForEvent(ObjectId eventId) {
         mongo.remove(Query.query(where("eventId").is(eventId)), Registration.class);
+    }
+
+    /**
+     * Before a user is deleted: their registrations go and their seats are freed. One registration
+     * per user per event (unique index), so each of those events loses exactly one.
+     */
+    public void deleteForUser(ObjectId userId) {
+        Query mine = Query.query(where("userId").is(userId));
+        List<ObjectId> eventIds = mongo.findDistinct(mine, "eventId", Registration.class, ObjectId.class);
+        if (eventIds.isEmpty()) {
+            return;
+        }
+        mongo.updateMulti(Query.query(where("_id").in(eventIds)), new Update().inc("registeredCount", -1), Event.class);
+        mongo.remove(Query.query(where("userId").is(userId)), Registration.class);
+    }
+
+    /** How many events each of {@code userIds} is registered for; users with none are missing. */
+    public Map<ObjectId, Integer> countByUser(Collection<ObjectId> userIds) {
+        if (userIds.isEmpty()) {
+            return Map.of();
+        }
+        Aggregation count = Aggregation.newAggregation(
+                Aggregation.match(where("userId").in(userIds)),
+                Aggregation.group("userId").count().as("count"));
+        return mongo.aggregate(count, Registration.class, Document.class).getMappedResults().stream()
+                .collect(Collectors.toUnmodifiableMap(d -> d.getObjectId("_id"), d -> d.getInteger("count")));
     }
 
     static Query byEventAndUser(ObjectId eventId, ObjectId userId) {

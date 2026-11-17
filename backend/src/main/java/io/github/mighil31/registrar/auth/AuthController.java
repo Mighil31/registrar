@@ -1,5 +1,6 @@
 package io.github.mighil31.registrar.auth;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(RefreshCookie.PATH)
+@SecurityRequirements // anonymous: no bearer token in the OpenAPI document
 class AuthController {
 
     static final String CLIENT_HEADER = "X-Requested-With";

@@ -28,7 +28,8 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain api(HttpSecurity http) throws Exception {
         ProblemDetailSecurityHandler problems = new ProblemDetailSecurityHandler();
-        return http.authorizeHttpRequests(auth -> auth.requestMatchers("/api/v1/auth/**", "/livez", "/readyz", "/error")
+        return http.authorizeHttpRequests(auth -> auth.requestMatchers(
+                                "/api/v1/auth/**", "/livez", "/readyz", "/error", "/v3/api-docs", "/v3/api-docs/**")
                         .permitAll()
                         .requestMatchers("/api/**")
                         .authenticated()

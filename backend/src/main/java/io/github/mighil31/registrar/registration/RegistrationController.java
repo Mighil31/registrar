@@ -98,6 +98,15 @@ class RegistrationController {
                 .toList();
     }
 
+    /** Another user's events, for admins (same shape as My events). */
+    @GetMapping("/users/{id}/registrations")
+    @PreAuthorize("hasAuthority('users:read')")
+    List<MyRegistration> ofUser(@PathVariable String id) {
+        return registrations.ofUser(ProblemException.id(id, "User")).stream()
+                .map(MyRegistration::of)
+                .toList();
+    }
+
     @GetMapping("/events/{id}/registrations")
     @PreAuthorize("hasAuthority('registrations:manage')")
     List<Attendee> attendees(@PathVariable String id) {

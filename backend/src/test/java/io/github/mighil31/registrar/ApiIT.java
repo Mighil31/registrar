@@ -34,8 +34,8 @@ public abstract class ApiIT {
     public static final String ADMIN_EMAIL = "admin@registrar.example";
     public static final String PASSWORD = "correct-horse-battery";
 
-    /** A signed-in user: their id and an access token. */
-    public record Account(String id, String token) {
+    /** A signed-in user: their id, email and an access token. */
+    public record Account(String id, String email, String token) {
 
         public String[] auth() {
             return bearer(token);
@@ -72,6 +72,25 @@ public abstract class ApiIT {
                         PASSWORD));
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         return account(response);
+    }
+
+    /** Signs in again, e.g. for a token with new permissions after a role change. */
+    protected Account signIn(String email) {
+        ResponseEntity<Map> response = api.post("/api/v1/auth/signin", Map.of("email", email, "password", PASSWORD));
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        return account(response);
+    }
+
+    /** A new member made admin by the first admin, signed in with an admin token. */
+    protected Account newAdmin(String name) {
+        Account member = member(name);
+        ResponseEntity<Map> granted = setRoles(member.id(), admin, "MEMBER", "ADMIN");
+        assertThat(granted.getStatusCode()).isEqualTo(HttpStatus.OK);
+        return signIn(member.email());
+    }
+
+    protected ResponseEntity<Map> setRoles(String userId, Account who, String... roles) {
+        return api.put("/api/v1/users/" + userId + "/roles", Map.of("roles", List.of(roles)), who.auth());
     }
 
     /** An open, in-person event a week from now; {@code changes} overrides any field. */
@@ -119,7 +138,7 @@ public abstract class ApiIT {
 
     private static Account account(ResponseEntity<Map> response) {
         Map<String, Object> body = response.getBody();
-        return new Account(
-                (String) ((Map<String, Object>) body.get("user")).get("id"), (String) body.get("accessToken"));
+        Map<String, Object> user = (Map<String, Object>) body.get("user");
+        return new Account((String) user.get("id"), (String) user.get("email"), (String) body.get("accessToken"));
     }
 }

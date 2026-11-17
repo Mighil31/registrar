@@ -29,6 +29,12 @@ registrar:
     password: ${REGISTRAR_ADMIN_PASSWORD:}
     name: ${REGISTRAR_ADMIN_NAME:}
     phone-number: ${REGISTRAR_ADMIN_PHONE:}
+  # Demo data (people, events, registrations) on an empty database. Never in production.
+  dev-seed: ${REGISTRAR_DEV_SEED:false}
+
+springdoc:
+  # The API only; not actuator or the error page.
+  paths-to-match: /api/**
 
 management:
   # Internal port, never exposed by a gateway. Only the probes are also on the public port.
