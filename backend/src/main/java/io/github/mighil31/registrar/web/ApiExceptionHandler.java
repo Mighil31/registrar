@@ -47,6 +47,13 @@ class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler
+    ProblemDetail problem(ProblemException ex) {
+        return ex.errors() == null
+                ? Problems.of(ex.status(), ex.type(), ex.getMessage())
+                : Problems.of(ex.status(), ex.type(), ex.getMessage(), ex.errors());
+    }
+
+    @ExceptionHandler
     ProblemDetail emailTaken(EmailTakenException ex) {
         return Problems.of(
                 HttpStatus.CONFLICT, "email-taken", ex.getMessage(), Map.of("email", "is already registered"));

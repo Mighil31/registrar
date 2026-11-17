@@ -58,6 +58,16 @@ public final class Api {
                 .toEntity(Map.class);
     }
 
+    @SuppressWarnings("rawtypes")
+    public ResponseEntity<Map> delete(String path, String... headers) {
+        return http.delete().uri(path).headers(h -> add(h, headers)).retrieve().toEntity(Map.class);
+    }
+
+    @SuppressWarnings("rawtypes")
+    public ResponseEntity<List> list(String path, String... headers) {
+        return http.get().uri(path).headers(h -> add(h, headers)).retrieve().toEntity(List.class);
+    }
+
     public static String[] bearer(String token) {
         return new String[] {HttpHeaders.AUTHORIZATION, "Bearer " + token};
     }
