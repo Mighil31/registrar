@@ -1,12 +1,12 @@
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { ConfirmDialog } from "../../components/ConfirmDialog";
 import { Button, Chips, Empty, LoadError, PageHeader, Pager, Panel, SearchBox, Skeleton, SkeletonRows, Stamp, Th, cx } from "../../components/ui";
 import { type Schemas, api, call } from "../../lib/api";
 import { count, phone, plural, when } from "../../lib/format";
 import { keys } from "../../lib/queries";
+import { useUrlSearch } from "../../lib/search";
 import { useSession } from "../../lib/session";
 
 type Role = "ADMIN" | "MEMBER";
@@ -33,16 +33,7 @@ const PAGE_SIZE = 25;
 function People() {
   const search = Route.useSearch();
   const navigate = useNavigate({ from: Route.fullPath });
-  const [q, setQ] = useState(search.q ?? "");
-
-  useEffect(() => {
-    const id = setTimeout(() => {
-      if ((search.q ?? "") !== q) {
-        void navigate({ search: (prev) => ({ ...prev, q: q || undefined, page: undefined }), replace: true });
-      }
-    }, 250);
-    return () => clearTimeout(id);
-  }, [q, search.q, navigate]);
+  const [q, setQ] = useUrlSearch(search.q, (q) => void navigate({ search: (prev) => ({ ...prev, q, page: undefined }), replace: true }));
 
   const people = useQuery({
     queryKey: [...keys.people, "list", search.q, search.role, search.page],

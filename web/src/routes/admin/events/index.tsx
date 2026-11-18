@@ -1,11 +1,11 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import { AccessStamp, AvailabilityStamp } from "../../../components/EventStamps";
 import { Chips, Empty, LoadError, PageHeader, Pager, Panel, SearchBox, SeatBar, SeatCount, Skeleton, SkeletonRows, Th, buttonClasses, cx } from "../../../components/ui";
 import { api, call } from "../../../lib/api";
 import { eventCode, when } from "../../../lib/format";
 import { keys } from "../../../lib/queries";
+import { useUrlSearch } from "../../../lib/search";
 
 type Mode = "OPEN" | "PRIVATE";
 type Status = "SCHEDULED" | "CANCELLED";
@@ -32,16 +32,7 @@ const PAGE_SIZE = 20;
 function AdminEvents() {
   const search = Route.useSearch();
   const navigate = useNavigate({ from: Route.fullPath });
-  const [q, setQ] = useState(search.q ?? "");
-
-  useEffect(() => {
-    const id = setTimeout(() => {
-      if ((search.q ?? "") !== q) {
-        void navigate({ search: (prev) => ({ ...prev, q: q || undefined, page: undefined }), replace: true });
-      }
-    }, 250);
-    return () => clearTimeout(id);
-  }, [q, search.q, navigate]);
+  const [q, setQ] = useUrlSearch(search.q, (q) => void navigate({ search: (prev) => ({ ...prev, q, page: undefined }), replace: true }));
 
   const events = useQuery({
     queryKey: [...keys.events, "all", search],

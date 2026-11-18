@@ -366,7 +366,7 @@ function AddPeople({ event }: { event: Schemas["EventResponse"] }) {
           <strong>
             {event.registeredCount >= (event.capacity ?? 0)
               ? `This event is full (${count(event.registeredCount)} / ${count(event.capacity ?? 0)}).`
-              : `Only ${count((event.capacity ?? 0) - event.registeredCount)} seats left.`}
+              : `Only ${plural((event.capacity ?? 0) - event.registeredCount, "seat")} left.`}
           </strong>{" "}
           Adding {picked.size === 1 ? "them" : "these people"} makes it {count(after)} / {count(event.capacity ?? 0)}. Admins may go over capacity;
           it's marked on their registration.

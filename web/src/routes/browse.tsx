@@ -1,10 +1,10 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { Link, createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import { Button, Chips, Empty, LoadError, PageHeader, Pager, Panel, SearchBox, SeatBar, SeatCount, Skeleton, SkeletonRows, Stamp, Th, cx } from "../components/ui";
 import { type Schemas, api, call } from "../lib/api";
 import { eventCode, fill, when } from "../lib/format";
 import { keys } from "../lib/queries";
+import { useUrlSearch } from "../lib/search";
 import { useRegistration } from "../lib/registration";
 
 interface Search {
@@ -27,17 +27,7 @@ const PAGE_SIZE = 20;
 function Browse() {
   const search = Route.useSearch();
   const navigate = useNavigate({ from: Route.fullPath });
-  const [q, setQ] = useState(search.q ?? "");
-
-  // Search as you type, a beat after the last key; the URL keeps it (shareable, back works).
-  useEffect(() => {
-    const id = setTimeout(() => {
-      if ((search.q ?? "") !== q) {
-        void navigate({ search: (prev) => ({ ...prev, q: q || undefined, page: undefined }), replace: true });
-      }
-    }, 250);
-    return () => clearTimeout(id);
-  }, [q, search.q, navigate]);
+  const [q, setQ] = useUrlSearch(search.q, (q) => void navigate({ search: (prev) => ({ ...prev, q, page: undefined }), replace: true }));
 
   const events = useQuery({
     queryKey: [...keys.events, "browse", search],

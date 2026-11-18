@@ -12,3 +12,7 @@ web/.impeccable/review/
 web/.impeccable/questions/
 web/.impeccable/hook.cache.json
 *.tsbuildinfo
+
+# Playwright
+web/test-results/
+web/playwright-report/

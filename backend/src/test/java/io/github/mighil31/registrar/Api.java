@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClient;
 import tools.jackson.databind.json.JsonMapper;
@@ -66,6 +67,15 @@ public final class Api {
     @SuppressWarnings("rawtypes")
     public ResponseEntity<List> list(String path, String... headers) {
         return http.get().uri(path).headers(h -> add(h, headers)).retrieve().toEntity(List.class);
+    }
+
+    /** Any method; the body is left as text, for tests that only look at the status and headers. */
+    public ResponseEntity<String> send(HttpMethod method, String path, Object body, String... headers) {
+        RestClient.RequestBodySpec request = http.method(method).uri(path).headers(h -> add(h, headers));
+        if (body != null) {
+            request.body(body);
+        }
+        return request.retrieve().toEntity(String.class);
     }
 
     public static String[] bearer(String token) {
