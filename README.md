@@ -44,6 +44,10 @@ REGISTRAR_DEV_SEED=true REGISTRAR_ADMIN_EMAIL=admin@example.com \
 cd web && npm ci && npm run dev    # http://localhost:5173
 ```
 
+Sign in as the admin from `.env`: `ADMIN_EMAIL` and `ADMIN_PASSWORD` (at least 12 characters, or
+the backend won't start). That account is created only while no admin exists, so changing `.env`
+later doesn't change its password.
+
 `DEV_SEED=true` in `.env` (`REGISTRAR_DEV_SEED`) fills an empty database with demo data: 40 people,
 12 events and their registrations. Every seeded person signs in with the password `registrar-demo`
 (e.g. `dana.whitfield@registrar.example`, an admin). Never set it in production.
