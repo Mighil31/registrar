@@ -25,14 +25,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       <LoadError error={error} retry={reset} />
     </Frame>
   ),
+  // Rendered inside Root's <Outlet />, so already inside the Frame (wrapping it again doubled the
+  // rail). The errorComponent replaces Root instead, so it needs its own Frame.
   notFoundComponent: () => (
-    <Frame>
+    <>
       <h1 className="m-0 text-3xl font-extrabold">Not found</h1>
       <p className="m-0 text-muted">There's nothing at this address, or it isn't yours to see.</p>
       <Link to="/" className={buttonClasses("primary")}>
         Go to the start
       </Link>
-    </Frame>
+    </>
   ),
 });
 
