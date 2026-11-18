@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { ConfirmDialog } from "../../components/ConfirmDialog";
 import { Button, Chips, Empty, LoadError, PageHeader, Pager, Panel, SearchBox, Skeleton, SkeletonRows, Stamp, Th, cx } from "../../components/ui";
 import { type Schemas, api, call } from "../../lib/api";
-import { count, phone, plural, when } from "../../lib/format";
+import { count, plural, when } from "../../lib/format";
 import { keys } from "../../lib/queries";
 import { useUrlSearch } from "../../lib/search";
 import { useSession } from "../../lib/session";
@@ -227,7 +227,7 @@ function PersonPanel({ id, onClose, inline }: { id: string; onClose: () => void;
             <p className="mt-0.5 mb-0 text-sm break-words text-muted">
               {person.data.email}
               <br />
-              {phone(person.data.phoneNumber)}
+              {person.data.phoneNumber}
             </p>
           </div>
         ) : person.isError ? (
@@ -251,7 +251,7 @@ function PersonPanel({ id, onClose, inline }: { id: string; onClose: () => void;
         <p className="m-0 text-sm break-words text-muted">
           {person.data.email}
           <br />
-          {phone(person.data.phoneNumber)}
+          {person.data.phoneNumber}
         </p>
       )}
       {inline && person.isError && <LoadError error={person.error} />}

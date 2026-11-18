@@ -101,11 +101,3 @@ export function toLocalInput(iso: string): string {
 export function fromLocalInput(value: string): string {
   return new Date(value).toISOString();
 }
-
-/** "2125550013" → "212 555 0013"; 11–12 digits are grouped in threes from the left. */
-export function phone(digits: string): string {
-  if (/^\d{10}$/.test(digits)) {
-    return `${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6)}`;
-  }
-  return digits.replace(/(\d{3})(?=\d{2})/g, "$1 ");
-}

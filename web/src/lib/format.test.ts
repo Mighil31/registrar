@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { eventCode, fill, percent, phone, tagPrefix } from "./format";
+import { eventCode, fill, percent, tagPrefix } from "./format";
 
 describe("tagPrefix", () => {
   it("uses the catalogue prefix for known tags", () => {
@@ -38,15 +38,5 @@ describe("fill", () => {
   it("caps the bar at 100%", () => {
     expect(percent(12, 10)).toBe(100);
     expect(percent(3, null)).toBe(0);
-  });
-});
-
-describe("phone", () => {
-  it("groups ten digits as 3-3-4", () => {
-    expect(phone("2125550013")).toBe("212 555 0013");
-  });
-
-  it("groups longer numbers in threes", () => {
-    expect(phone("447700900123")).toBe("447 700 900 123");
   });
 });
